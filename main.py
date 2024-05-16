@@ -3,6 +3,27 @@ import csv
 import telebot
 
 bot = telebot.TeleBot("7062787659:AAGvQNRhY97i8I4OkNMjD39ZR27tgz8tSTM")
+# Создание базы данных SQLite и таблицы
+def create_database():
+    conn = sqlite3.connect('tg1base.db')
+    cursor = conn.cursor()
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS tgClient(
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        user_id INTEGER,
+        first_name TEXT,
+        username TEXT,
+        f TEXT,
+        i TEXT,
+        o TEXT,
+        datarosh TEXT
+        )
+        ''')
+    conn.commit()
+    conn.close()
+
+# Вызываем функцию создания базы данных при старте
+create_database()
 
 @bot.message_handler(commands=['start'])
 def handle_start(message):
